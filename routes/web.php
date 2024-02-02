@@ -1,9 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\AuthGoogleController;
 use App\Http\Controllers\Auth\PasswordController;
-use App\View\Components\Form\Register;
-use Illuminate\Console\View\Components\Component;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +26,10 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'loginProses')->name('login.proses');
     Route::post('/register', 'registerProses')->name('register.proses');
     // Route::post('/logout');
+});
+Route::name('google.')->controller(AuthGoogleController::class)->group(function () {
+    Route::get('/auth/google', 'auth')->name('auth');
+    Route::get('/callback/google', 'callback')->name('callback');
 });
 Route::controller(PasswordController::class)->group(function () {
     Route::get('forgot-password', 'forgot')->name('forgot');

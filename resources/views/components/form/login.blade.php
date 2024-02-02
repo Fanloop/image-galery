@@ -54,12 +54,12 @@
       login
     </button>
     <p class="text-center opacity-75 my-3">or</p>
-    <button
+    <a href="{{ route('google.auth') }}"
       class="align-middle w-full select-none font-sans font-bold text-center tracking-wider transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none py-3.5 px-7 rounded-lg border border-blue-gray-500 text-blue-gray-500 text-base focus:ring focus:ring-blue-gray-200 hover:text-blue-gray-900 hover:border-blue-gray-900 hover:-translate-y-2 active:opacity-[0.85] duration-300 flex justify-center items-center gap-3"
       type="button">
       <img src="{{ asset('assets/icon/google_icon.svg') }}" alt="metamask" class="w-5 h-5" />
       Continue with Google
-    </button>
+    </a>
     <p
       class="block mt-4 font-sans tracking-wide text-base antialiased font-normal leading-relaxed text-center text-gray-700">
       Don't have an account?
