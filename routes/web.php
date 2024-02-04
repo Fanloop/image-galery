@@ -25,7 +25,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/register', 'register')->name('register');
     Route::post('/login', 'loginProses')->name('login.proses');
     Route::post('/register', 'registerProses')->name('register.proses');
-    // Route::post('/logout');
+    Route::get('/logout', 'logout')->name('logout');
 });
 Route::name('google.')->controller(AuthGoogleController::class)->group(function () {
     Route::get('/auth/google', 'auth')->name('auth');
@@ -37,3 +37,7 @@ Route::controller(PasswordController::class)->group(function () {
     Route::post('forgot-password', 'forgotProses')->name('forgot.proses');
     Route::get('reset-password', 'resetProses')->name('reset.proses');
 });
+
+Route::view('/test', 'layout.main', [
+    'title' => 'home'
+]);
