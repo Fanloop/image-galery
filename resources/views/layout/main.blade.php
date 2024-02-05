@@ -31,7 +31,7 @@
       {{-- search end --}}
     </header>
     <section class="flex h-full w-full">
-      <nav class="hidden lg:flex flex-col gap-16 w-2/12 py-5 px-10">
+      <nav class="hidden lg:flex flex-col gap-16 w-3/12 py-5 px-10 border-r border-gray-400">
         <ul class="flex flex-col gap-4">
           <li class="">
             <a href="" class="capitalize font-medium text-xl tracking-wide">
@@ -68,6 +68,12 @@
           </a>
         @endauth
       </nav>
+      <div class="w-full overflow-x-hidden overflow-y-scroll">
+        @yield('main')
+      </div>
+      <div class="hidden lg:block border-l border-gray-400 w-5/12">
+        @yield('sidebar')
+      </div>
     </section>
   </main>
 @endsection
