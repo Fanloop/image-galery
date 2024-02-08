@@ -19,6 +19,6 @@ class IsLogin
         if (!Auth::check()) {
             return $next($request);
         }
-        return redirect();
+        return redirect()->intended('/');
     }
 }

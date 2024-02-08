@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   @vite('resources/css/app.css')
   @stack('style')
-  <title>{{ $title }}</title>
+  <title>Kalouki | {{ $title }}</title>
 </head>
 
 <body>

@@ -3,6 +3,10 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\AuthGoogleController;
 use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\Page\HomePageController;
+use App\Http\Controllers\Page\ProfileController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,28 +20,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return 'work';
-})->name('main');
+Route::get('/', [HomePageController::class, 'root'])->name('main');
 
-Route::controller(AuthController::class)->group(function () {
-    Route::get('/login', 'login')->name('login');
-    Route::get('/register', 'register')->name('register');
-    Route::post('/login', 'loginProses')->name('login.proses');
-    Route::post('/register', 'registerProses')->name('register.proses');
-    Route::get('/logout', 'logout')->name('logout');
-});
-Route::name('google.')->controller(AuthGoogleController::class)->group(function () {
-    Route::get('/auth/google', 'auth')->name('auth');
-    Route::get('/callback/google', 'callback')->name('callback');
-});
-Route::controller(PasswordController::class)->group(function () {
-    Route::get('forgot-password', 'forgot')->name('forgot');
-    Route::get('reset-password', 'reset')->name('reset');
-    Route::post('forgot-password', 'forgotProses')->name('forgot.proses');
-    Route::get('reset-password', 'resetProses')->name('reset.proses');
+Route::middleware('is.login')->group(function () {
+    Route::controller(AuthController::class)->group(function () {
+        Route::get('/login', 'login')->name('login');
+        Route::get('/register', 'register')->name('register');
+        Route::post('/login', 'loginProses')->name('login.proses');
+        Route::post('/register', 'registerProses')->name('register.proses');
+        Route::get('/logout', 'logout')->name('logout')->withoutMiddleware('is.login');
+    });
+    Route::name('google.')->controller(AuthGoogleController::class)->group(function () {
+        Route::get('/auth/google', 'auth')->name('auth');
+        Route::get('/callback/google', 'callback')->name('callback');
+    });
+    Route::controller(PasswordController::class)->group(function () {
+        Route::get('forgot-password', 'forgot')->name('forgot');
+        Route::get('reset-password', 'reset')->name('reset');
+        Route::post('forgot-password', 'forgotProses')->name('forgot.proses');
+        Route::get('reset-password', 'resetProses')->name('reset.proses');
+    });
 });
 
-Route::view('/test', 'layout.main', [
-    'title' => 'home'
-]);
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [HomePageController::class, 'home'])->name('home');
+    Route::get('/profile', [ProfileController::class, 'myProfile'])->name('profile');
+});
