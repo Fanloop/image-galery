@@ -16,7 +16,7 @@
     "dependencies": {
         "@material-tailwind/html": "^2.2.2",
         "boxicons": "^2.1.4",
-        "htmx.org": "^1.9.10",
-        "infinite-scroll": "^4.0.1"
+        "croppr": "^2.3.1",
+        "htmx.org": "^1.9.10"
     }
 }

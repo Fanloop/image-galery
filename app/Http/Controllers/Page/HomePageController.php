@@ -22,7 +22,7 @@ class HomePageController extends Controller
     {
         $user = Auth::user();
 
-        return response()->view('layout.main', [
+        return response()->view('pages.home.main', [
             'title' => 'Home',
             'user' => $user,
         ]);

@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\AuthGoogleController;
 use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\Feature\ComponentController;
+use App\Http\Controllers\Feature\Profile\EditController;
 use App\Http\Controllers\Page\HomePageController;
 use App\Http\Controllers\Page\ProfileController;
 use App\Models\User;
@@ -44,5 +46,8 @@ Route::middleware('is.login')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [HomePageController::class, 'home'])->name('home');
-    Route::get('/profile', [ProfileController::class, 'myProfile'])->name('profile');
+    Route::prefix('/profile')->name('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'myProfile'])->name('user');
+        Route::get('/edit', [EditController::class, 'index'])->name('edit');
+    });
 });

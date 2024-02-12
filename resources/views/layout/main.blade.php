@@ -14,9 +14,12 @@
     <header class="border-b border-gray-400 flex justify-between px-5 lg:px-10 lg:pr-20 py-3 w-screen">
       {{-- logo start --}}
       <div class="flex items-center gap-1">
-        <img src="{{ asset('assets/img/logo.jpeg') }}" alt="avatar"
+        <img src="{{ asset('assets/img/logo.jpeg') }}" alt="logo kalouki"
           class="relative inline-block h-10 lg:h-11 aspect-square mix-blend-multiply !rounded-none object-cover object-center" />
-        <h1 class="text-2xl font-medium tracking-wide">Kalouki</h1>
+        <h1 class="flex items-baseline text-2xl font-semibold">Kalou</span>
+          <span class="text-red-800 font-bold mr-1">Ki</span><span
+            class="inline-block h-2 aspect-square rounded-full border-2 border-gray-200 outline outline-2 outline-gray-900  bg-red-800">
+        </h1>
       </div>
       {{-- logo end --}}
       {{-- search start --}}
@@ -66,12 +69,13 @@
       {{-- profile end --}}
     </header>
     <section id="main" class="flex flex-col-reverse lg:flex-row h-full w-full">
+      {{-- navbar start --}}
       <nav
         class="flex items-center lg:flex-col gap-16 w-full lg:w-3/12 py-4 lg:py-5 lg:px-10 border-t lg:border-t-0 lg:border-r border-gray-400 sticky lg:static bottom-0">
         <ul class="flex flex-row lg:flex-col lg:gap-4 justify-evenly w-full">
           <li class="">
           @section('home')
-            <a href=""
+            <a href="{{ route('home') }}"
               class="flex gap-3 items-center capitalize font-medium hover:font-semibold text-xl tracking-wide">
               <box-icon name='home' class="block"></box-icon>
               <span class="hidden lg:block">home</span>
@@ -98,7 +102,7 @@
         </li>
         <li>
           @section('profile')
-            <a href="{{ route('profile') }}"
+            <a href="{{ route('profile.user') }}"
               class="flex gap-3 items-center capitalize font-medium hover:font-semibold text-xl tracking-wide">
               <box-icon name='user' class="block"></box-icon>
               <span class="hidden lg:block">profile</span>
@@ -108,18 +112,19 @@
       </ul>
       @auth
         <a href="{{ route('logout') }}"
-          class="hidden lg:block select-none rounded border w-full border-red-600 py-3 px-6 text-center align-middle font-sans text-xl font-bold capitalize text-red-600 transition-all hover:bg-red-700 hover:text-gray-100 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          class="hidden lg:block select-none rounded border w-full border-red-600 py-3 px-6 text-center align-middle text-xl font-bold capitalize text-red-600 transition-all hover:bg-red-700 hover:text-gray-100 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button">
           Log Out
         </a>
       @else
         <a href="{{ route('login') }}"
-          class="hidden lg:block select-none rounded border w-full border-red-600 py-3 px-6 text-center align-middle font-sans text-xl font-bold capitalize text-red-600 transition-all hover:bg-red-700 hover:text-gray-100 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          class="hidden lg:block select-none rounded border w-full border-red-600 py-3 px-6 text-center align-middle text-xl font-bold capitalize text-red-600 transition-all hover:bg-red-700 hover:text-gray-100 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button">
           Log In
         </a>
       @endauth
     </nav>
+    {{-- navbar end --}}
     <div class="w-full h-full overflow-x-hidden overflow-y-scroll border-2 no-scrollbar">
       @yield('main')
     </div>

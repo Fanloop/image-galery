@@ -18,7 +18,7 @@
       {{-- image end --}}
 
       {{-- form start --}}
-      <div class="">
+      <div>
         @yield('form')
       </div>
       {{-- form end --}}

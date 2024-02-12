@@ -24,7 +24,7 @@ class AuthGoogleController extends Controller
             return redirect()->route('login')->with('error', 'terjadi kesalahan, coba lagi');
         }
 
-        $result = User::query()->where('email', $user->email)->first();
+        $result = User::query()->where('email', $user->email)->where('google_id', $user->id)->first();
 
         if ($result) {
             Auth::login($result);

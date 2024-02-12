@@ -12,7 +12,7 @@ class ProfileController extends Controller
     public function myProfile(): Response
     {
         $user = Auth::user();
-        return response()->view('pages.profile', [
+        return response()->view('pages.profile.main', [
             'title' => $user->nama,
             'user' => $user,
         ]);
