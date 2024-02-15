@@ -9,8 +9,30 @@
 
 @push('script')
   <script src="{{ asset('assets/js/core/moreText.js') }}"></script>
-  <script src="{{ asset('assets/js/core/dropdown.js') }}"></script>
   <script src="{{ asset('assets/js/core/menu.js') }}"></script>
+  <script>
+    const tabs = document.querySelectorAll('#menu button');
+    const contentAreas = document.querySelectorAll('#content div');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remove active class from all tabs
+        tabs.forEach(t => t.classList.remove('active', 'border-blue-500'));
+
+        // Add active class to the clicked tab
+        tab.classList.add('active', 'border-blue-500');
+
+        // Hide all content areas
+        contentAreas.forEach(ca => ca.classList.add('hidden'));
+
+        // Show the content area associated with the clicked tab
+        document.getElementById(tab.dataset.target).classList.remove('hidden');
+      });
+    });
+
+    // Initialize the first tab as active
+    document.getElementById('gallery-tab').click();
+  </script>
 @endpush
 
 @section('main')
@@ -73,27 +95,33 @@
     {{-- body end --}}
     {{-- content start --}}
     <div>
+      {{-- header content start --}}
       <div id="menu"
         class="sticky z-20 top-0 flex bg-gray-100 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:w-1/2 after:h-[0.15rem] after:bg-black after:transition-all after:-translate-x-full">
-        <button role="button"
+        <button role="button" id="gallery-tab" data-target="gallery"
           class="flex gap-3 items-center justify-center py-3 w-full capitalize font-bold text-xl tracking-normal cursor-pointer">
           <box-icon name='folder' class="hidden"></box-icon>
           <box-icon name='folder' type='solid'></box-icon>
           <span class="hidden lg:block">Gallery</span>
         </button>
-        <button role="button"
+        <button role="button" id="like-tab" data-target="like"
           class="flex gap-3 items-center justify-center py-3 w-full capitalize font-bold text-xl tracking-normal cursor-pointer">
           <box-icon name='heart' type='solid' class="hidden"></box-icon>
           <box-icon name='heart'></box-icon>
           <span class="hidden lg:block">Like</span>
         </button>
       </div>
-      {{-- gallery start --}}
-      <div id="content" class="flex">
-        <x-list.gallery />
-        <x-list.photo />
+      {{-- header content end --}}
+      {{-- body content start --}}
+      <div id="content" class="block">
+        <div id="gallery">
+          <x-list.gallery />
+        </div>
+        <div id="like" class="hidden">
+          <x-list.photo />
+        </div>
       </div>
-      {{-- gallery end --}}
+      {{-- body content end --}}
     </div>
     {{-- conten end --}}
   </section>
