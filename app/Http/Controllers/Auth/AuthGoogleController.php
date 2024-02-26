@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -32,10 +34,12 @@ class AuthGoogleController extends Controller
             $newUser = User::query()->create([
                 'nama' => $user->name,
                 'username' => $user->nickname ?? 'users' . Str::random(),
+                'password' => Hash::make(Str::password()),
                 'email' => $user->email,
                 'google_id' => $user->id,
-                'avatar' => $user->avatar
             ]);
+            Storage::makeDirectory($newUser->username);
+
             Auth::login($newUser);
         }
 

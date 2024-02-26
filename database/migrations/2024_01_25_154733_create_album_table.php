@@ -15,8 +15,6 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('nama')->nullable(false);
             $table->string('deskripsi')->nullable(false);
-            $table->string('thumbnail')->nullable(true);
-            $table->enum('visibility', ['public', 'private', 'friend'])->nullable(false)->default('public');
             $table->foreignUuid('user_id')->nullable(false);
             $table->timestamps();
 

@@ -3,12 +3,10 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\AuthGoogleController;
 use App\Http\Controllers\Auth\PasswordController;
-use App\Http\Controllers\Feature\ComponentController;
-use App\Http\Controllers\Feature\Profile\EditController;
 use App\Http\Controllers\Page\HomePageController;
 use App\Http\Controllers\Page\ProfileController;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Livewire\Auth\Login;
+use App\Livewire\Auth\Register;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,12 +20,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/testing', Main::class);
+
 Route::get('/', [HomePageController::class, 'root'])->name('main');
 
 Route::middleware('is.login')->group(function () {
     Route::controller(AuthController::class)->group(function () {
-        Route::get('/login', 'login')->name('login');
-        Route::get('/register', 'register')->name('register');
+        Route::get('/login', Login::class)->name('login');
+        Route::get('/register', Register::class)->name('register');
         Route::post('/login', 'loginProses')->name('login.proses');
         Route::post('/register', 'registerProses')->name('register.proses');
         Route::get('/logout', 'logout')->name('logout')->withoutMiddleware('is.login');
@@ -45,9 +45,12 @@ Route::middleware('is.login')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/home', [HomePageController::class, 'home'])->name('home');
+    Route::get('/home', \App\Livewire\App\Layout\Home::class)->name('home');
     Route::prefix('/profile')->name('profile.')->group(function () {
-        Route::get('/', [ProfileController::class, 'myProfile'])->name('user');
-        Route::get('/edit', [EditController::class, 'index'])->name('edit');
+        Route::get('/{id?}', \App\Livewire\App\Layout\Profile::class)->name('user');
+        // Route::get('/{}', \App\Livewire\App\Layout\Profile::class)->name('user');
+        // Route::get('/edit/{id}', \App\Livewire\App\Layout\Profile::class)->name('edit');
     });
+    Route::get('/serach', \App\Livewire\App\Layout\Search::class)->name('search');
+    Route::get('/upload', \App\Livewire\App\Layout\Upload::class)->name('upload');
 });

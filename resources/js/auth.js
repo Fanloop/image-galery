@@ -1,11 +1,9 @@
 document.addEventListener("livewire:navigated", () => {
-    console.log("pindah halaman");
     const passwordField = document.querySelector("#password") ?? undefined;
     const passwordToggle =
         document.querySelector("#password-toggle") ?? undefined;
 
     passwordToggle.addEventListener("click", () => {
-        console.log("tombol diklik");
         passwordField.type =
             passwordField.type === "text" ? "password" : "text";
         if (passwordField.type === "text") {
@@ -15,6 +13,5 @@ document.addEventListener("livewire:navigated", () => {
             passwordToggle.children[0].classList.remove("bi-eye");
             passwordToggle.children[0].classList.add("bi-eye-slash");
         }
-        console.log(passwordField.type);
     });
 });

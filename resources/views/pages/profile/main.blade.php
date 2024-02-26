@@ -10,29 +10,7 @@
 @push('script')
   <script src="{{ asset('assets/js/core/moreText.js') }}"></script>
   <script src="{{ asset('assets/js/core/menu.js') }}"></script>
-  <script>
-    const tabs = document.querySelectorAll('#menu button');
-    const contentAreas = document.querySelectorAll('#content div');
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        // Remove active class from all tabs
-        tabs.forEach(t => t.classList.remove('active', 'border-blue-500'));
-
-        // Add active class to the clicked tab
-        tab.classList.add('active', 'border-blue-500');
-
-        // Hide all content areas
-        contentAreas.forEach(ca => ca.classList.add('hidden'));
-
-        // Show the content area associated with the clicked tab
-        document.getElementById(tab.dataset.target).classList.remove('hidden');
-      });
-    });
-
-    // Initialize the first tab as active
-    document.getElementById('gallery-tab').click();
-  </script>
+  <script src="{{ asset('assets/js/core/dropdown.js') }}"></script>
 @endpush
 
 @section('main')
@@ -116,9 +94,6 @@
       <div id="content" class="block">
         <div id="gallery">
           <x-list.gallery />
-        </div>
-        <div id="like" class="hidden">
-          <x-list.photo />
         </div>
       </div>
       {{-- body content end --}}

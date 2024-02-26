@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('google_id')->nullable()->unique();
+            $table->string('google_id')->nullable(true)->unique();
             $table->string('username', 50)->nullable(false)->unique();
             $table->string('password')->nullable(true)->collation('utf8_bin');
             $table->string('email')->nullable(false)->unique();

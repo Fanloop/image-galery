@@ -20,19 +20,19 @@ class AuthController extends Controller
         $this->user = $user;
     }
 
-    public function login(): Response
-    {
-        return response()->view('auth.login', [
-            'title' => 'Login'
-        ]);
-    }
+    // public function login(): Response
+    // {
+    //     return response()->view('auth.login', [
+    //         'title' => 'Login'
+    //     ]);
+    // }
 
-    public function register(): Response
-    {
-        return response()->view('auth.register', [
-            'title' => 'Register'
-        ]);
-    }
+    // public function register(): Response
+    // {
+    //     return response()->view('auth.register', [
+    //         'title' => 'Register'
+    //     ]);
+    // }
 
     public function loginProses(LoginRequest $request): RedirectResponse|string
     {
