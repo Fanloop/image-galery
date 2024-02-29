@@ -17,15 +17,10 @@ class Follow extends Model
     protected $keyType = 'string';
     public $timestamps = false;
 
-    protected $fillable = ['follower_id', 'following_id'];
-
-    public function follower(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'follower_id');
-    }
+    protected $fillable = ['user', 'following_id'];
 
     public function following(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'following_id');
+        return $this->belongsTo(User::class, 'following_id', 'id');
     }
 }

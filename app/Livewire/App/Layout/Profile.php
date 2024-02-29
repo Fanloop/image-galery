@@ -2,7 +2,7 @@
 
 namespace App\Livewire\App\Layout;
 
-use App\Models\User;
+use App\Models\Follow;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -10,9 +10,9 @@ use Livewire\Component;
 #[Title('Profile')]
 class Profile extends Component
 {
-    private const PATH_COMPONENT = 'app.page.profile';
+    private const PATH_COMPONENT = 'app.page.profile.';
     public $user;
-    public $current;
+    public $component;
     public $userInfo;
 
     public function mount($id = null)
@@ -24,7 +24,7 @@ class Profile extends Component
 
     public function setComponent(string $componentName = 'index')
     {
-        $this->current = self::PATH_COMPONENT . "." . $componentName;
+        $this->component = self::PATH_COMPONENT . $componentName;
     }
 
     public function render()

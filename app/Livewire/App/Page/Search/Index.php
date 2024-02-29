@@ -12,10 +12,6 @@ class Index extends Component
     public string $searchUser = '';
     public $listUser;
 
-    public function mount()
-    {
-    }
-
     public function render()
     {
         if (strlen($this->searchUser) >= 1) {

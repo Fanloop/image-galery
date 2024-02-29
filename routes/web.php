@@ -7,6 +7,9 @@ use App\Http\Controllers\Page\HomePageController;
 use App\Http\Controllers\Page\ProfileController;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
+use App\Models\Album;
+use App\Models\Follow;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +26,11 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/testing', Main::class);
 
 Route::get('/', [HomePageController::class, 'root'])->name('main');
+Route::get('/test', function () {
+    return dd($this->following = Follow::query()->where('user', '$user')
+        ->where('following_id', 'haf')
+        ->count());
+});
 
 Route::middleware('is.login')->group(function () {
     Route::controller(AuthController::class)->group(function () {
@@ -48,9 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', \App\Livewire\App\Layout\Home::class)->name('home');
     Route::prefix('/profile')->name('profile.')->group(function () {
         Route::get('/{id?}', \App\Livewire\App\Layout\Profile::class)->name('user');
-        // Route::get('/{}', \App\Livewire\App\Layout\Profile::class)->name('user');
-        // Route::get('/edit/{id}', \App\Livewire\App\Layout\Profile::class)->name('edit');
     });
-    Route::get('/serach', \App\Livewire\App\Layout\Search::class)->name('search');
+    Route::get('/search', \App\Livewire\App\Layout\Search::class)->name('search');
     Route::get('/upload', \App\Livewire\App\Layout\Upload::class)->name('upload');
 });

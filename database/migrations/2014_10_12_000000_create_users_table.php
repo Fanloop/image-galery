@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('google_id')->nullable(true)->unique();
             $table->string('username', 50)->nullable(false)->unique();
-            $table->string('password')->nullable(true)->collation('utf8_bin');
+            $table->string('password')->nullable(false)->collation('utf8_bin');
             $table->string('email')->nullable(false)->unique();
             $table->string('nama')->nullable(false);
             $table->text('bio')->nullable(true);

@@ -83,3 +83,12 @@
   </form>
   {{-- form end --}}
 </section>
+
+@script
+  <script>
+    let navbarHeight = document.querySelector('header').offsetHeight;
+    let contentHeight = document.querySelector('#main');
+
+    contentHeight.style.height = `calc(100vh - ${navbarHeight}px)`;
+  </script>
+@endscript

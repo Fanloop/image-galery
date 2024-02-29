@@ -23,7 +23,6 @@ class AlbumFactory extends Factory
             'nama' => fake()->name(),
             'deskripsi' => fake()->words(10, true),
             'thumbnail' => fake()->words(5, true),
-            'visibility' => 'public',
             'user_id' => '9b41a434-a472-4084-a1ce-74c4f91f583e',
         ];
     }

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('follow', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('follower_id');
+            $table->foreignUuid('user');
             $table->foreignUuid('following_id');
 
-            $table->foreign('follower_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('user')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreign('following_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }

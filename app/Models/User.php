@@ -51,12 +51,12 @@ class User extends Authenticatable
 
     public function album(): HasMany
     {
-        return $this->hasMany(Album::class);
+        return $this->hasMany(Album::class, 'user_id', 'id');
     }
 
     public function foto(): HasMany
     {
-        return $this->hasMany(Foto::class);
+        return $this->hasMany(Foto::class, 'user_id', 'id');
     }
 
     public function like(): HasMany
@@ -64,13 +64,8 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
-    public function followers(): HasMany
-    {
-        return $this->hasMany(Follow::class, 'following_id');
-    }
-
     public function following(): HasMany
     {
-        return $this->hasMany(Follow::class, 'follower_id');
+        return $this->hasMany(Follow::class, 'follower_id', 'id');
     }
 }

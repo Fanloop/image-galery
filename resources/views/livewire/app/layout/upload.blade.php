@@ -102,8 +102,8 @@
       @endauth
     </nav>
     {{-- navbar end --}}
-    <div class="w-full h-full overflow-x-hidden overflow-y-scroll border-2 no-scrollbar p-5 lg:p-10">
-      <livewire:app.page.upload.index />
+    <div class="w-full h-full overflow-x-hidden overflow-y-scroll border-2 no-scrollbar">
+      <livewire:app.page.upload.index :component="$component" :key="$component" :id="$user->id" />
     </div>
     <div class="hidden lg:block border-l border-gray-400 w-5/12">
       @yield('sidebar')

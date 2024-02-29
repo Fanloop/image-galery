@@ -102,8 +102,8 @@
       @endauth
     </nav>
     {{-- navbar end --}}
-    <div class="w-full h-full overflow-x-hidden overflow-y-scroll border-2 no-scrollbar">
-      <livewire:dynamic-component :component="$current" :key="$current" :$userInfo />
+    <div class="w-full h-full overflow-x-hidden overflow-y-scroll border-2 no-scrollbar" wire:scroll>
+      <livewire:dynamic-component :component="$component" :key="$component" :$userInfo />
     </div>
     <div class="hidden lg:block border-l border-gray-400 w-5/12">
       @yield('sidebar')
@@ -118,7 +118,4 @@
 
     contentHeight.style.height = `calc(100vh - ${navbarHeight}px)`;
   </script>
-  <script src="{{ asset('assets/js/core/moreText.js') }}"></script>
-  <script src="{{ asset('assets/js/core/menu.js') }}"></script>
-  <script src="{{ asset('assets/js/core/dropdown.js') }}"></script>
 @endscript
