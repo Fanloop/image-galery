@@ -16,9 +16,9 @@ class FotoSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::query()->find('9b672b60-2c29-483f-9594-c1c9a6d979e4');
-        $album = Album::query()->find('9b6fdc88-58fa-484d-9f1a-788aeee51984');
-        $path = 'storage/' . $user->username . '/' . $album->nama;
+        $user = User::query()->find('9b91e38b-9cae-417e-9e9a-41da184669e1');
+        $album = Album::query()->find('9b91e3d3-953d-4f6d-af17-6287d79f0ae7');
+        $path = 'storage/' . $user->id . '/' . $album->nama;
 
         for ($i = 0; $i < 4; $i++) {
             $name = fake()->word();

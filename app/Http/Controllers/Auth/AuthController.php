@@ -10,30 +10,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
-    private User $user;
-
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
-
-    // public function login(): Response
-    // {
-    //     return response()->view('auth.login', [
-    //         'title' => 'Login'
-    //     ]);
-    // }
-
-    // public function register(): Response
-    // {
-    //     return response()->view('auth.register', [
-    //         'title' => 'Register'
-    //     ]);
-    // }
-
     public function loginProses(LoginRequest $request): RedirectResponse|string
     {
         $emailOrUsername = $request->get('usernameOrEmail');
@@ -62,6 +42,7 @@ class AuthController extends Controller
         $user = User::query()->create($data);
 
         if ($user->wasRecentlyCreated) {
+            Storage::makeDirectory($user->id);
             return redirect()->route('login');
         }
 

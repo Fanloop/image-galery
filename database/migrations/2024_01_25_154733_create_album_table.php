@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('album', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nama')->nullable(false);
-            $table->string('deskripsi')->nullable(false);
+            $table->string('deskripsi')->nullable(true);
             $table->foreignUuid('user_id')->nullable(false);
             $table->timestamps();
 

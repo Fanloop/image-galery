@@ -18,7 +18,7 @@ class Komentar extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'comment', 'user_id', 'foto_id'
+        'komentar', 'user_id', 'foto_id'
     ];
 
     public function user(): BelongsTo

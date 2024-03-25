@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('judul')->nullable(false);
             $table->string('deskripsi')->nullable(true);
             $table->string('path')->nullable(false);
-            $table->unsignedBigInteger('like_count')->nullable(false)->default(0);
-            $table->unsignedBigInteger('comment_count')->nullable(false)->default(0);
             $table->foreignUuid('user_id')->nullable(false);
             $table->foreignUuid('album_id')->nullable(false);
             $table->timestamps();

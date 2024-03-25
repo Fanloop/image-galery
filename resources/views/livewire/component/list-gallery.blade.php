@@ -1,7 +1,7 @@
 <div class="h-full w-full">
   @forelse ($gallery as $item)
     {{-- item start --}}
-    <a wire:key="{{ $item->id }}" href="{{ route('profile.user', ['id' => $item->id]) }}"
+    <button type="button" wire:key="{{ $item->id }}" wire:click='$parent.$parent.setComponent("upload")'
       class="flex items-center w-full p-3 transition-all rounded-lg outline-none text-start hover:bg-gray-200 hover:text-900 focus:bg-gray-50 focus:bg-opacity-80 focus:text-gray-900/75 active:bg-gray-50 active:bg-opacity-80 active:text-gray-900/75">
       <div class="grid mr-4 place-items-center">
         <i class="bi bi-journal-richtext text-3xl opacity-80"></i>
@@ -11,13 +11,19 @@
           {{ $item->nama }}
         </h6>
       </div>
-    </a>
+    </button>
     {{-- item end --}}
   @empty
-    <button
+    <button type="button" wire:loading.attr='disabled' wire:click='$parent.$parent.setComponent("create-gallery")'
       class="h-full w-full flex justify-center items-center flex-col gap-5 text-md md:text-lg font-medium opacity-60">
       <i class="bi bi-plus-circle text-5xl"></i>
       Add new gallery
     </button>
   @endforelse
 </div>
+
+@script
+  <script>
+    initFlowbite();
+  </script>
+@endscript

@@ -1,43 +1,25 @@
-<div id="accordion-collapse" data-accordion="collapse">
+<div class="h-full flex flex-col gap-1">
   @forelse ($gallery as $item)
-    <div wire:key="{{ $item->id }}">
-      <h2 id="accordion-collapse-heading-{{ $item->id }}">
-        <button type="button"
-          class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
-          data-accordion-target="#accordion-collapse-body-{{ $item->id }}" aria-expanded="false"
-          aria-controls="accordion-collapse-body-{{ $item->id }}">
-          <div class="flex gap-3 items-center">
-            <i class="bi bi-folder text-lg"></i>
-            <span>{{ $item->nama }}</span>
-          </div>
-          <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M9 5 5 1 1 5" />
-          </svg>
-        </button>
-      </h2>
-      <div id="accordion-collapse-body-{{ $item->id }}" class="hidden"
-        aria-labelledby="accordion-collapse-heading-{{ $item->id }}">
-        <div
-          class="flex flex-col @if (!empty($item->foto) && count($item->foto) > 0) gap-2 p-5 @endif border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-          @forelse ($item->foto as $foto)
-            <a href="#{{ $foto->id }}"
-              class="w-full p-3 rounded-md text-left text-gray-500 dark:text-gray-400 hover:text-gray-900 hover:bg-gray-200 transition-all">
-              <i class="bi bi-image text-lg me-2"></i>
-              <span>{{ $foto->judul }}</span>
-            </a>
-          @empty
-            <div></div>
-          @endforelse
-        </div>
+    {{-- item start --}}
+    <a href="{{ route('gallery', ['idGallery' => $item->id]) }}" wire:key="{{ $item->id }}" wire:navigate
+      :idAlbum="{{ $item->id }}"
+      class="flex items-center w-full p-3 transition-all rounded-lg outline-none text-start hover:bg-gray-200 hover:text-900 focus:bg-gray-50 focus:bg-opacity-80 focus:text-gray-900/75 active:bg-gray-50 active:bg-opacity-80 active:text-gray-900/75">
+      <div class="grid mr-4 place-items-center">
+        <i class="bi bi-journal-richtext text-3xl opacity-80"></i>
       </div>
-    </div>
+      <div>
+        <h6 class="block text-base antialiased font-semibold leading-relaxed tracking-normal text-gray-900/75">
+          {{ $item->nama }}
+        </h6>
+      </div>
+    </a>
+    {{-- item end --}}
   @empty
-    <div></div>
+    <div class="h-full w-full grid place-content-center text-md md:text-lg font-medium opacity-60">
+      You don't have any gallery
+    </div>
   @endforelse
 </div>
-
 @script
   <script>
     initFlowbite();

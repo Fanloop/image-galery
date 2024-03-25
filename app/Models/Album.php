@@ -18,6 +18,12 @@ class Album extends Model
     protected $keyType = 'string';
     public $timestamps = true;
 
+    protected $fillable = [
+        'nama',
+        'deskripsi',
+        'user_id',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

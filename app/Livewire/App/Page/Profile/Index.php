@@ -2,8 +2,10 @@
 
 namespace App\Livewire\App\Page\Profile;
 
+use App\Models\Album;
 use App\Models\Follow;
 use App\Models\User;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -16,6 +18,7 @@ class Index extends Component
     public int $userFollowing;
     public string $component;
     public int $following;
+    public $gallery;
 
     public function mount(string $userInfo)
     {
@@ -24,6 +27,9 @@ class Index extends Component
         $this->userFollower = Follow::query()->where('user', $userInfo)->count();
         $this->userFollowing = Follow::query()->where('following_id', $userInfo)->count();
         $this->checkFollow($userInfo, Auth::user()->id);
+        $this->gallery = Album::with(['foto' => function (Builder $query) {
+            $query->orderBy('created_at', 'desc');
+        }])->where('user_id', $this->user->id)->get(['id', 'nama']);
     }
 
     #[On('set-component')]

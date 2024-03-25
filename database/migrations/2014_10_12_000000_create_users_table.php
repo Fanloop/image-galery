@@ -21,7 +21,6 @@ return new class extends Migration
             $table->text('bio')->nullable(true);
             $table->string('alamat')->nullable(true);
             $table->string('avatar')->nullable(true);
-            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -18,6 +18,14 @@ class Foto extends Model
     protected $keyType = 'string';
     public $timestamps = true;
 
+    protected $fillable = [
+        'judul',
+        'deskripsi',
+        'path',
+        'user_id',
+        'album_id',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

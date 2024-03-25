@@ -5,42 +5,42 @@
       <img src="{{ asset('assets/img/logo.jpeg') }}" alt="logo kalouki"
         class="relative inline-block h-10 lg:h-11 aspect-square mix-blend-multiply !rounded-none object-cover object-center" />
       <h1 class="flex items-baseline text-2xl font-semibold">Kalou</span>
-        <span class="text-red-800 font-bold mr-1">Ki</span><span
-          class="inline-block h-2 aspect-square rounded-full border-2 border-gray-200 outline outline-2 outline-gray-900  bg-red-800">
+        <span class="text-red-600 font-bold mr-1">Ki</span><span
+          class="inline-block h-2 aspect-square rounded-full border-2 border-gray-200 outline outline-2 outline-gray-900  bg-red-600">
       </h1>
     </div>
     {{-- logo end --}}
     {{-- profile start --}}
     <div class="relative hidden lg:flex flex-col group/dropdown">
       @if ($user->avatar)
-        <img alt="photo {{ $user->nama }}" src="{{ $user->avatar }}"
+        <img alt="photo {{ $user->nama }}" src="{{ asset("storage/{$user->avatar}") }}"
           class="inline-block object-cover object-center w-11 h-11 rounded-full cursor-pointer" />
       @else
         <div
-          class="relative grid place-content-center bg-gray-300 h-11 w-11 text-lg font-medium !rounded-full ring-1 ring-gray-400 object-cover object-center">
+          class="relative grid place-content-center bg-gray-300/70 h-11 w-11 text-lg font-medium !rounded-full ring-1 ring-gray-400 object-cover object-center capitalize">
           {{ substr($user->nama, 0, 1) }}
         </div>
       @endif
       <div class="hidden group-hover/dropdown:block">
         <ul
-          class="absolute translate-x-1/2 right-1/2 z-10 flex min-w-[180px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
+          class="absolute translate-x-1/2 right-1/2 z-10 flex min-w-[180px] flex-col gap-2 overflow-auto rounded-md border border-gray-50 bg-white p-3 font-sans text-sm font-normal text-gray-500 shadow-lg shadow-gray-500/10 focus:outline-none">
           <a wire:navigate href="{{ route('profile.user') }}"
-            class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900 group">
+            class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-gray-50 hover:bg-opacity-80 hover:text-gray-900 focus:bg-gray-50 focus:bg-opacity-80 focus:text-gray-900 active:bg-gray-50 active:bg-opacity-80 active:text-gray-900 group">
             <i class="bi bi-person-circle text-xl"></i>
             <p class="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
               My Profile
             </p>
           </a>
           <button
-            class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900 group">
+            class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-gray-50 hover:bg-opacity-80 hover:text-gray-900 focus:bg-gray-50 focus:bg-opacity-80 focus:text-gray-900 active:bg-gray-50 active:bg-opacity-80 active:text-gray-900 group">
             <i class="bi bi-person-vcard text-xl"></i>
             <p class="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
               Edit Profile
             </p>
           </button>
-          <hr class="border-blue-gray-50" />
+          <hr class="border-gray-300" />
           <a href="{{ route('logout') }}"
-            class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900 group">
+            class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-gray-50 hover:bg-opacity-80 hover:text-gray-900 focus:bg-gray-50 focus:bg-opacity-80 focus:text-gray-900 active:bg-gray-50 active:bg-opacity-80 active:text-gray-900 group">
             <i class="bi bi-door-open text-xl"></i>
             <p class="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
               Log Out
@@ -106,7 +106,7 @@
       <livewire:app.page.home.index />
     </div>
     <div class="hidden lg:block border-l border-gray-400 w-5/12">
-      @yield('sidebar')
+      <livewire:component.recomend />
     </div>
   </section>
 </main>

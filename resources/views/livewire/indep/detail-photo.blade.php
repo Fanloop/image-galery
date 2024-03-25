@@ -13,7 +13,7 @@
     {{-- profile start --}}
     <div class="relative hidden lg:flex flex-col group/dropdown">
       @if ($user->avatar)
-        <img alt="photo {{ $user->nama }}" src="{{ asset("storage/{$user->avatar}") }}"
+        <img alt="photo {{ $user->nama }}" src="{{ asset("storage/{$user->avatar}") }}" draggable="false"
           class="inline-block object-cover object-center w-11 h-11 rounded-full cursor-pointer" />
       @else
         <div
@@ -73,8 +73,8 @@
           </a>
         </li>
         <li>
-          <a href="javascript:void(0)" class="flex gap-3 items-center capitalize font-bold text-xl tracking-normal">
-            <i class="bi bi-plus-square-fill text-2xl"></i>
+          <a href="{{ route('upload') }}" class="flex gap-3 items-center capitalize font-bold text-xl tracking-normal">
+            <i class="bi bi-plus-square text-2xl"></i>
             <span class="hidden lg:block">upload</span>
           </a>
         </li>
@@ -102,8 +102,77 @@
       @endauth
     </nav>
     {{-- navbar end --}}
-    <div class="w-full h-full overflow-x-hidden overflow-y-scroll border-2 no-scrollbar">
-      <livewire:dynamic-component :component="$component" :key="$component" :id="$user->id" />
+    <div class="w-full h-full overflow-x-hidden overflow-y-scroll no-scrollbar border-2 pb-20">
+      <section class="h-full flex flex-col gap-3 lg:gap-3 p-5 lg:px-20 lg:p-5">
+        {{-- title start --}}
+        <div class="flex gap-3 justify-between items-center">
+          <div class="flex gap-5 items-center">
+            <a href="{{ $previousUrl }}" wire:navigate
+              class="grid lg:hover:bg-gray-300 active:bg-gray-300 w-12 aspect-square text-3xl rounded-full place-content-center transition-all">
+              <i class="bi bi-arrow-left"></i>
+            </a>
+            <div class="font-bold text-xl lg:text-2xl mb-1">Back</div>
+          </div>
+        </div>
+        {{-- title end --}}
+        {{-- content start --}}
+        <div class="h-full flex flex-col items-start gap-5">
+          {{-- profile start --}}
+          <a href="{{ route('profile.user', ['id' => $foto->user->id]) }}" wire:navigate
+            class="flex items-center w-full transition-all rounded-lg outline-none text-start hover:bg-red-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+            <div class="grid mr-4 place-items-center">
+              @if ($foto->user->avatar)
+                <img alt="candice" src="{{ asset("storage/{$foto->user->avatar}") }}" draggable="false"
+                  class="relative inline-block h-12 w-12 !rounded-full ring-1 ring-gray-400 object-cover object-center" />
+              @else
+                <div
+                  class="relative grid place-content-center bg-gray-300 h-12 w-12 text-lg font-medium !rounded-full ring-1 ring-gray-400 object-cover object-center">
+                  {{ substr($foto->user->nama, 0, 1) }}
+                </div>
+              @endif
+            </div>
+            <div>
+              <h6 class="block text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
+                {{ $foto->user->username }}
+              </h6>
+              <p class="block text-sm antialiased font-normal leading-normal text-gray-700">
+                {{ $foto->user->nama }}
+              </p>
+            </div>
+          </a>
+          {{-- profile end --}}
+          {{-- descripsi start --}}
+          @if (!empty($foto->deskripsi))
+            <p class="font-medium">{{ $foto->deskripsi }}</p>
+          @endif
+          {{-- descripsi end --}}
+          {{-- photo start --}}
+          <div>
+            <img src="{{ asset("storage/{$foto->path}") }}" alt="{{ $foto->judul }}" draggable="false"
+              class="md:h-96 w-auto md:min-w-96 object-contain block">
+            <div class="flex justify-between items-center p-3 text-base">
+              <div>
+                <button type="button" wire:click='like' class="flex gap-1 items-center font-semibold">
+                  @if ($this->checkLike($foto->id))
+                    <i class="bi bi-heart-fill text-red-600 text-xl"></i>
+                  @else
+                    <i class="bi bi-heart text-xl"></i>
+                  @endif
+                  {{ $foto->like->count() }}
+                </button>
+              </div>
+              <button type="button" wire:click='download' wire:loading.attr='disabled'>
+                <i class="bi bi-download"></i>
+              </button>
+            </div>
+          </div>
+          {{-- photo end --}}
+        </div>
+        {{-- content end --}}
+        <div class="py-10">
+          <livewire:component.list-komentar :id="$foto->id" />
+        </div>
+      </section>
     </div>
     <div class="hidden lg:block border-l border-gray-400 w-5/12">
       <livewire:component.recomend />
@@ -118,7 +187,4 @@
 
     contentHeight.style.height = `calc(100vh - ${navbarHeight}px)`;
   </script>
-  <script src="{{ asset('assets/js/core/moreText.js') }}"></script>
-  <script src="{{ asset('assets/js/core/menu.js') }}"></script>
-  <script src="{{ asset('assets/js/core/dropdown.js') }}"></script>
 @endscript

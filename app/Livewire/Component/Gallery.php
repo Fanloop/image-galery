@@ -3,7 +3,6 @@
 namespace App\Livewire\Component;
 
 use App\Models\Album;
-use App\Models\User;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\Component;
 

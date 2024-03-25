@@ -73,8 +73,8 @@
           </a>
         </li>
         <li>
-          <a href="javascript:void(0)" class="flex gap-3 items-center capitalize font-bold text-xl tracking-normal">
-            <i class="bi bi-plus-square-fill text-2xl"></i>
+          <a href="{{ route('upload') }}" class="flex gap-3 items-center capitalize font-bold text-xl tracking-normal">
+            <i class="bi bi-plus-square text-2xl"></i>
             <span class="hidden lg:block">upload</span>
           </a>
         </li>
@@ -103,7 +103,51 @@
     </nav>
     {{-- navbar end --}}
     <div class="w-full h-full overflow-x-hidden overflow-y-scroll border-2 no-scrollbar">
-      <livewire:dynamic-component :component="$component" :key="$component" :id="$user->id" />
+      <section class="h-full flex flex-col gap-3 lg:gap-5 p-5 lg:px-20 lg:p-5">
+        {{-- title start --}}
+        <div class="flex flex-col md:flex-row gap-3 md:justify-between lg:items-center">
+          <div class="flex gap-5 items-center">
+            <a href="{{ route('profile.user', ['id' => $gallery->user_id]) }}" wire:navigate
+              class="grid lg:hover:bg-gray-300 active:bg-gray-300 w-12 aspect-square text-3xl rounded-full place-content-center transition-all">
+              <i class="bi bi-arrow-left"></i>
+            </a>
+            <div class="font-bold text-xl lg:text-2xl mb-1">{{ $gallery->nama }}</div>
+          </div>
+          @if ($gallery->user_id == $user->id)
+            <a href="{{ route('gallery.edit', ['idGallery' => $gallery->id]) }}" wire:navigate
+              class="grid place-content-center font-semibold text-center transition-all text-base md:text-lg h-12 md:h-full px-6 rounded-md bg-red-700 text-gray-100 active:bg-transparent disabled:bg-transparent disabled:text-red-700 disabled:border disabled:border-red-700 hover:bg-transparent hover:text-red-700 hover:border hover:border-red-700"
+              type="button">
+              Edit Gallery
+            </a>
+          @endif
+        </div>
+        {{-- title end --}}
+        <p>{{ $gallery->deskripsi }}</p>
+        <p class="lg:text-right opacity-60 text-xs"><b>create at</b> {{ $gallery->created_at }}</p>
+        {{-- content start --}}
+        <div class="h-full flex flex-col gap-1">
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-2">
+            @if ($gallery->user_id == $user->id)
+              <a href="{{ route('gallery.photo', ['idGallery' => $gallery->id]) }}" wire:navigate
+                class="w-full max-w-full rounded-sm aspect-square bg-gray-300 flex flex-col justify-center items-center font-medium opacity-60">
+                <i class="bi bi-plus-lg text-2xl"></i>
+                <h3 class="text-xl">Add photo</h3>
+              </a>
+            @endif
+            @forelse ($gallery->foto as $item)
+              <a href="{{ route('gallery.photo.detail', ['id' => $item->id]) }}" class="hover:cursor-pointer"
+                wire:navigate wire:key="{{ $item->id }}">
+                <img class="w-full max-w-full object-cover object-center rounded-sm aspect-square"
+                  src="{{ asset('storage/' . $item->path) }}" alt="{{ $item->judul }}">
+              </a>
+            @empty
+              <div class="col-span-2 md:col-span-3 text-center mt-52 opacity-50 font-medium md:text-lg">No Picture here
+              </div>
+            @endforelse
+          </div>
+        </div>
+        {{-- content end --}}
+      </section>
     </div>
     <div class="hidden lg:block border-l border-gray-400 w-5/12">
       <livewire:component.recomend />

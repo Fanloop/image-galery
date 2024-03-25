@@ -9,6 +9,7 @@ use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Models\Album;
 use App\Models\Follow;
+use App\Models\Foto;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Route;
 
@@ -26,11 +27,6 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/testing', Main::class);
 
 Route::get('/', [HomePageController::class, 'root'])->name('main');
-Route::get('/test', function () {
-    return dd($this->following = Follow::query()->where('user', '$user')
-        ->where('following_id', 'haf')
-        ->count());
-});
 
 Route::middleware('is.login')->group(function () {
     Route::controller(AuthController::class)->group(function () {
@@ -59,4 +55,12 @@ Route::middleware('auth')->group(function () {
     });
     Route::get('/search', \App\Livewire\App\Layout\Search::class)->name('search');
     Route::get('/upload', \App\Livewire\App\Layout\Upload::class)->name('upload');
+
+    Route::prefix('gallery')->name('gallery')->group(function () {
+        Route::get('{idGallery}', \App\Livewire\Indep\Gallery::class)->name('');
+        Route::get('{idGallery}/edit', \App\Livewire\Indep\Edit::class)->name('.edit');
+
+        Route::get('{idGallery}/add-photo', \App\Livewire\Indep\AddPhoto::class)->name('.photo');
+        Route::get('{id}/detail-photo', \App\Livewire\Indep\DetailPhoto::class)->name('.photo.detail');
+    });
 });

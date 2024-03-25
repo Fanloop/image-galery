@@ -38,9 +38,11 @@ class AuthGoogleController extends Controller
                 'email' => $user->email,
                 'google_id' => $user->id,
             ]);
-            Storage::makeDirectory($newUser->username);
 
-            Auth::login($newUser);
+            if ($newUser) {
+                Storage::makeDirectory($newUser->id);
+                Auth::login($newUser);
+            }
         }
 
         return redirect()->intended();

@@ -14,6 +14,7 @@ class Profile extends Component
     public $user;
     public $component;
     public $userInfo;
+    public $id;
 
     public function mount($id = null)
     {
@@ -22,7 +23,7 @@ class Profile extends Component
         $this->userInfo = $id ?? Auth::user()->id;
     }
 
-    public function setComponent(string $componentName = 'index')
+    public function setComponent(string $componentName = 'index', string $id = null)
     {
         $this->component = self::PATH_COMPONENT . $componentName;
     }

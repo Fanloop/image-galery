@@ -1,6 +1,6 @@
 <div class="">
   {{-- search start --}}
-  <div class="block w-full bg-gray-100 p-5 border-b border-gray-400 sticky top-0 z-50">
+  <div class="block w-full bg-gray-100 p-5 border-b border-gray-400 sticky top-0 z-50" :lazy="false">
     <div class="w-full">
       <div class="relative h-10 w-full">
         <input wire:model.live="searchUser" type="text" placeholder="Search"
@@ -13,11 +13,11 @@
   <div class="flex min-w-[240px] flex-col gap-0 lg:gap-1 px-3 lg:px-5 py-5 text-base font-normal text-blue-gray-700">
     @forelse ($listUser as $user)
       {{-- item start --}}
-      <a wire:key="{{ $user->id }}" href="{{ route('profile.user', ['id' => $user->id]) }}"
+      <a wire:key="{{ $user->id }}" href="{{ route('profile.user', ['id' => $user->id]) }}" wire:navigate
         class="flex items-center w-full p-3 transition-all rounded-lg outline-none text-start hover:bg-red-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
         <div class="grid mr-4 place-items-center">
           @if ($user->avatar)
-            <img alt="candice" src="{{ $user->avatar }}"
+            <img alt="candice" src="{{ asset("storage/{$user->avatar}") }}"
               class="relative inline-block h-12 w-12 !rounded-full ring-1 ring-gray-400 object-cover object-center" />
           @else
             <div

@@ -2,11 +2,11 @@
   {{-- header start --}}
   <div class="flex flex-col lg:flex-row items-center gap-3 lg:gap-5 h-fit">
     @if ($user->avatar)
-      <img src="{{ $user->avatar }}" alt="{{ $user->nama }}" draggable="false"
+      <img src="{{ asset("storage/{$user->avatar}") }}" alt="{{ $user->nama }}" draggable="false"
         class="inline-block h-24 lg:h-32 aspect-square !rounded-full object-cover object-center" />
     @else
       <div
-        class="relative grid place-content-center bg-gray-300/70 h-24 lg:h-32 aspect-square text-4xl lg:text-6xl font-medium !rounded-full ring-1 ring-gray-400 object-cover object-center">
+        class="relative grid place-content-center bg-gray-300/70 h-24 lg:h-32 aspect-square text-4xl lg:text-6xl font-medium !rounded-full ring-1 ring-gray-400 object-cover object-center capitalize">
         {{ substr($user->nama, 0, 1) }}
       </div>
     @endif
@@ -18,7 +18,7 @@
     </div>
   </div>
   @if (!empty($user->alamat))
-    <h3 class="flex items-center font-medium -mt-3 text-base opacity-70 italic break-words w-full">
+    <h3 class="hidden lg:flex items-center font-medium -mt-3 text-base opacity-70 italic break-words w-full">
       <i class="bi bi-geo-alt text-lg font-medium mr-1"></i>
       <p>{{ $user->alamat }}</p>
     </h3>
@@ -50,20 +50,20 @@
       </div>
     @endif
     <button id="more-hide" role="button"
-      class="hidden bottom-0 right-0 bg-gray-200 opacity-95 font-bold italic cursor-pointer">more...</button>
+      class="hidden bottom-0 right-0 bg-transparent opacity-95 font-bold italic cursor-pointer">more...</button>
   </div>
   {{-- bio end --}}
   <div class="flex justify-center gap-3">
     @if ($user->id == Auth::user()->id)
       {{-- edit start --}}
       <button type="button" wire:loading.attr='disabled' wire:click='$parent.setComponent("detail")'
-        class="block font-semibold text-center transition-all text-base py-2 md:py-3 px-6 w-full md:w-fit rounded-md bg-gray-300 text-gray-900 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+        class="block font-semibold text-center transition-all text-base py-2 md:py-3 px-6 w-full md:w-fit rounded-md bg-gray-300/70 text-gray-800 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
         type="button" data-ripple-dark="true">
         Edit profile</button>
       {{-- edit end --}}
       {{-- share start --}}
       <button type="button" data-modal-target="crypto-modal" data-modal-toggle="crypto-modal"
-        class="block font-semibold text-center transition-all text-base py-2 md:py-3 px-6 w-full md:w-fit rounded-md bg-gray-300 text-gray-900 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+        class="block font-semibold text-center transition-all text-base py-2 md:py-3 px-6 w-full md:w-fit rounded-md bg-gray-300/70 text-gray-800 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
         data-ripple-light="true" data-dialog-target="animated-dialog">
         Share Profile
       </button>
@@ -114,7 +114,7 @@
                 </li>
               </ul>
               <div class="inline-flex items-center text-xs text-gray-500 dark:text-gray-400">
-                &copy; copyright
+                &copy; copyright by
                 <a href="https://github.com/Fanloop" target="_blank" class="ml-1 font-bold hover:underline">
                   Fanloop (Fahri Prayoga)</a>
               </div>
@@ -126,7 +126,7 @@
     @else
       <button type="button" wire:loading.attr='disabled' wire:click='follow'
         class="grid place-content-center font-semibold text-center transition-all text-base md:text-xl py-3 h-12 px-6 w-1/2 md:w-1/4 rounded-full @if ($following < 1) bg-red-700 text-gray-100 active:bg-transparent disabled:bg-transparent disabled:text-red-700 disabled:border disabled:border-red-700 hover:bg-transparent hover:text-red-700 hover:border hover:border-red-700 @else bg-transparent text-red-700 disabled:bg-red-700 disabled:text-gray-100 border border-red-700 hover:bg-red-700 hover:text-gray-100 hover:border-none @endif"
-        type="button" data-ripple-dark="true">
+        type="button">
         @if ($following < 1)
           Follow
         @else
