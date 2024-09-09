@@ -1,66 +1,131 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><img src="./public/assets/img/logo.jpeg" width="200" alt="Laravel Logo"></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Kalouki - Personal Image Gallery Project
 
-## About Laravel
+Welcome to Kalouki, my personal image gallery project! Kalouki is a user-friendly application that allows users to showcase and organize images with ease. Built with a focus on simplicity and modern design, Kalouki is ideal for anyone looking to display their favorite photos in a beautiful, organized way.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   **Responsive Design**: The gallery adapts to any screen size, providing a seamless experience on desktop, tablet, and mobile devices.
+-   **Like Images**: Engage with images by liking your favorites.
+-   **Commenting**: Share your thoughts by leaving comments on images.
+-   **Google Login**: Easy and secure login using Google authentication.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Installation
 
-## Learning Laravel
+To run Kalouki locally on your machine, follow these steps:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Clone the repository:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+    ```
+    git clone https://github.com/Fanloop/image-galery.git
+    ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. Navigate into the project directory:
 
-## Laravel Sponsors
+    ```
+    cd image-galery
+    ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+3. Install the backend dependencies (Laravel):
 
-### Premium Partners
+    ```
+    composer install
+    ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+4. Install the frontend dependencies:
 
-## Contributing
+    ```
+    npm install
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5. Set up the environment variables for Laravel:
 
-## Code of Conduct
+    - Copy `.env.example` to `.env` and configure the database settings.
+    - Generate an application key:
+        ```
+        php artisan key:generate
+        ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+6. Set up the database:
 
-## Security Vulnerabilities
+    ```
+    php artisan migrate
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+7. Compile frontend assets (Livewire and Tailwind CSS):
+
+    ```
+    npm run dev
+    ```
+
+8. Start the Laravel server:
+    ```
+    php artisan serve
+    ```
+
+## Technologies Used
+
+-   **Frontend**: Livewire and Tailwind CSS for a modern and responsive user interface.
+-   **Backend**: Laravel for robust server-side functionality.
+-   **Database**: MySQL or other databases supported by Laravel for efficient data storage and management.
+-   **Authentication**: Integrated with Google OAuth for secure and convenient login.
+
+## How to Use
+
+1. Access the application in your browser:
+
+    ```
+    http://localhost:8000
+    ```
+
+    for both frontend and backend.
+
+2. Log in using your Google account:
+
+    - Ensure you have set up Google OAuth 2.0 credentials through the [Google Cloud Console](https://console.cloud.google.com/).
+    - Create a new project and enable the "Google+ API" or "Google Identity" service.
+    - Set up OAuth consent screen and add the necessary scopes for email and profile.
+    - Obtain your Client ID and Client Secret, then configure them in your `.env` file for Laravel:
+        ```
+        GOOGLE_CLIENT_ID=your-client-id
+        GOOGLE_CLIENT_SECRET=your-client-secret
+        GOOGLE_REDIRECT_URI=http://localhost:8000/callback/google
+        ```
+
+3. After logging in, start uploading images to create your personalized gallery.
+4. Like and comment on images to interact with your collection.
+
+> **Note:** Ensure that the Google API credentials are kept secure and not exposed publicly. Always use environment variables to manage sensitive information.
+
+## Screenshots
+
+## Screenshots
+
+![Login Page](./img_example/login.png)
+_Login page of Kalouki where users can sign in using Google._
+
+![Home Page](./img_example/home.png)
+_Overview of the home page showcasing the image gallery._
+
+![Profile Page](./img_example/profile.png)
+_Profile page where users can view and manage their profile details and uploaded images._
+
+![Search Page](./img_example/search.png)
+_Search page allowing users to search and filter images within the gallery._
+
+## About This Project
+
+Kalouki was developed as a personal project to enhance my skills in full-stack web development. It showcases my ability to build interactive, responsive, and user-centered applications. This project reflects my passion for creating visually appealing and functional web solutions.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is for personal use and learning purposes.
+
+## Contact
+
+If you have any questions or feedback, feel free to reach out to me at [fahriprayoga3010@gmail.com](mailto:fahriprayoga3010@gmail.com).
+
+---
+
+Thank you for taking the time to explore Kalouki! I hope you enjoy this project as much as I enjoyed building it.
