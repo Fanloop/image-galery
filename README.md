@@ -100,8 +100,6 @@ To run Kalouki locally on your machine, follow these steps:
 
 ## Screenshots
 
-## Screenshots
-
 ![Login Page](./img_example/login.png)
 _Login page of Kalouki where users can sign in using Google._
 
